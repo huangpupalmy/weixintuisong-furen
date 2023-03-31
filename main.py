@@ -101,43 +101,12 @@ def get_weather(province, city):
 
 
 
-#健康小提示API
-def health():
-    if (Whether_health!=False):
-        try:
-            conn = http.client.HTTPSConnection('api.tianapi.com')  #接口域名
-            params = urllib.parse.urlencode({'key':tianxing_API})
-            headers = {'Content-type':'application/x-www-form-urlencoded'}
-            conn.request('POST','/healthtip/index',params,headers)
-            res = conn.getresponse()
-            data = res.read()
-            data = json.loads(data)
-            data = data["newslist"][0]["content"]
-            return data
-        except:
-             return ("健康小提示API调取错误，请检查API是否正确申请或是否填写正确")
-
 
 
 
         
 
-#下雨概率和建议
-def tip():
-    if (Whether_tip!=False):
-        try:
-            conn = http.client.HTTPSConnection('api.tianapi.com')  #接口域名
-            params = urllib.parse.urlencode({'key':tianxing_API,'city':city})
-            headers = {'Content-type':'application/x-www-form-urlencoded'}
-            conn.request('POST','/tianqi/index',params,headers)
-            res = conn.getresponse()
-            data = res.read()
-            data = json.loads(data)
-            pop = data["newslist"][0]["pop"]
-            tips = data["newslist"][0]["tips"]
-            return pop,tips
-        except:
-            return ("天气预报API调取错误，请检查API是否正确申请或是否填写正确"),""
+
 
 #推送信息
 def send_message(to_user, access_token, city_name, weather, max_temperature, min_temperature, pipi, lizhi, pop, tips, note_en, note_ch, health_tip, lucky_):
